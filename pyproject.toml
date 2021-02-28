@@ -24,8 +24,3 @@ skip = [
     '.mypy_cache',
     '.ipython',
 ]
-
-[tool.pytest.ini_options]
-minversion = "6.0"
-python_files = "test_*.py"
-addopts = "-rsxX --reuse-db"
