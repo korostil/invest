@@ -1,89 +1,93 @@
+from enum import Enum
+
 RATIOS = {
-    "P/E": {"measures": "", "description": ""},
-    "P/S": {"measures": "", "description": ""},
+    'P/E': {'measures': '', 'description': ''},
+    'P/S': {'measures': '', 'description': ''},
 }
-SECTORS = [
-    "Retail Trade",
-    "Finance",
-    "Energy Minerals",
-    "Technology Services",
-    "Non-Energy Minerals",
-    "Communications",
-    "Process Industries",
-    "Utilities",
-    "Consumer Durables",
-    "Transportation",
-    "Electronic Technology",
-    "Producer Manufacturing",
-    "Industrial Services",
-    "Health Services",
-    "Consumer Non-Durables",
-    "Miscellaneous",
-    "Commercial Services",
-    "Health Technology",
-    "Consumer Services",
-    "Distribution Services",
-]
-INDUSTRIES = [
-    "Internet Retail",
-    "Regional Banks",
-    "Integrated Oil",
-    "Internet Software/Services",
-    "Other Metals/Minerals",
-    "Precious Metals",
-    "Steel",
-    "Oil & Gas Production",
-    "Food Retail",
-    "Wireless Telecommunications",
-    "Aluminum",
-    "Chemicals: Agricultural",
-    "Coal",
-    "Electric Utilities",
-    "Homebuilding",
-    "Investment Banks/Brokers",
-    "Specialty Telecommunications",
-    "Marine Shipping",
-    "Aerospace & Defense",
-    "Airlines",
-    "Chemicals: Specialty",
-    "Insurance Brokers/Services",
-    "Other Transportation",
-    "Miscellaneous Manufacturing",
-    "Electronics/Appliance Stores",
-    "Agricultural Commodities/Milling",
-    "Financial Conglomerates",
-    "Drugstore Chains",
-    "Apparel/Footwear Retail",
-    "Construction Materials",
-    "Railroads",
-    "Oilfield Services/Equipment",
-    "Real Estate Development",
-    "Finance/Rental/Leasing",
-    "Trucks/Construction/Farm Machinery",
-    "Data Processing Services",
-    "Hospital/Nursing Management",
-    "Engineering & Construction",
-    "Food: Meat/Fish/Dairy",
-    "Beverages: Alcoholic",
-    "Oil Refining/Marketing",
-    "Motor Vehicles",
-    "Metal Fabrication",
-    "Gas Distributors",
-    "Auto Parts: OEM",
-    "Electronic Components",
-    "Investment Trusts/Mutual Funds",
-    "Food: Specialty/Candy",
-    "Miscellaneous Commercial Services",
-    "Biotechnology",
-    "Trucking",
-    "Industrial Machinery",
-    "Pharmaceuticals: Other",
-    "Building Products",
-    "Broadcasting",
-    "Restaurants",
-    "Home Furnishings",
-    "Household/Personal Care",
-    "Investment Managers",
-    "Wholesale Distributors",
-    "Industrial Conglomerates",
-]
+
+
+class SectorEnum(str, Enum):
+    retail_trade = 'Retail Trade'
+    finance = 'Finance'
+    energy_minerals = 'Energy Minerals'
+    technology_services = 'Technology Services'
+    non_energy_minerals = 'Non-Energy Minerals'
+    communications = 'Communications'
+    process_industries = 'Process Industries'
+    utilities = 'Utilities'
+    consumer_durables = 'Consumer Durables'
+    transportation = 'Transportation'
+    electronic_technology = 'Electronic Technology'
+    producer_manufacturing = 'Producer Manufacturing'
+    industrial_services = 'Industrial Services'
+    health_services = 'Health Services'
+    consumer_non_durables = 'Consumer Non-Durables'
+    miscellaneous = 'Miscellaneous'
+    commercial_services = 'Commercial Services'
+    health_technology = 'Health Technology'
+    consumer_services = 'Consumer Services'
+    distribution_services = 'Distribution Services'
+
+
+class IndustryEnum(str, Enum):
+    internet_retail = 'Internet Retail'
+    regional_banks = 'Regional Banks'
+    integrated_oil = 'Integrated Oil'
+    internet_software_services = 'Internet Software/Services'
+    other_metals_minerals = 'Other Metals/Minerals'
+    precious_metals = 'Precious Metals'
+    steel = 'Steel'
+    oil_gas_production = 'Oil & Gas Production'
+    food_retail = 'Food Retail'
+    wireless_telecommunications = 'Wireless Telecommunications'
+    aluminum = 'Aluminum'
+    chemicals_agricultural = 'Chemicals: Agricultural'
+    coal = 'Coal'
+    electric_utilities = 'Electric Utilities'
+    homebuilding = 'Homebuilding'
+    investment_banks_brokers = 'Investment Banks/Brokers'
+    specialty_telecommunications = 'Specialty Telecommunications'
+    marine_shipping = 'Marine Shipping'
+    aerospace_defense = 'Aerospace & Defense'
+    airlines = 'Airlines'
+    chemicals_specialty = 'Chemicals: Specialty'
+    insurance_brokers_services = 'Insurance Brokers/Services'
+    other_transportation = 'Other Transportation'
+    miscellaneous_manufacturing = 'Miscellaneous Manufacturing'
+    electronics_appliance_stores = 'Electronics/Appliance Stores'
+    agricultural_commodities_milling = 'Agricultural Commodities/Milling'
+    financial_conglomerates = 'Financial Conglomerates'
+    drugstore_chains = 'Drugstore Chains'
+    apparel_footwear_retail = 'Apparel/Footwear Retail'
+    construction_materials = 'Construction Materials'
+    railroads = 'Railroads'
+    oilfield_services_equipment = 'Oilfield Services/Equipment'
+    real_estate_development = 'Real Estate Development'
+    finance_rental_leasing = 'Finance/Rental/Leasing'
+    trucks_construction_farm_machinery = 'Trucks/Construction/Farm Machinery'
+    data_processing_services = 'Data Processing Services'
+    hospital_nursing_management = 'Hospital/Nursing Management'
+    engineering_construction = 'Engineering & Construction'
+    food_meat_fish_dairy = 'Food: Meat/Fish/Dairy'
+    beverages_alcoholic = 'Beverages: Alcoholic'
+    oil_refining_marketing = 'Oil Refining/Marketing'
+    motor_vehicles = 'Motor Vehicles'
+    metal_fabrication = 'Metal Fabrication'
+    gas_distributors = 'Gas Distributors'
+    auto_parts_oem = 'Auto Parts: OEM'
+    electronic_components = 'Electronic Components'
+    investment_trusts_mutual_funds = 'Investment Trusts/Mutual Funds'
+    food_specialty_candy = 'Food: Specialty/Candy'
+    miscellaneous_commercial_services = 'Miscellaneous Commercial Services'
+    biotechnology = 'Biotechnology'
+    trucking = 'Trucking'
+    industrial_machinery = 'Industrial Machinery'
+    pharmaceuticals_other = 'Pharmaceuticals: Other'
+    building_products = 'Building Products'
+    broadcasting = 'Broadcasting'
+    restaurants = 'Restaurants'
+    home_furnishings = 'Home Furnishings'
+    household_personal_care = 'Household/Personal Care'
+    investment_managers = 'Investment Managers'
+    wholesale_distributors = 'Wholesale Distributors'
+    industrial_conglomerates = 'Industrial Conglomerates'
