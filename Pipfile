@@ -17,6 +17,9 @@ mixer = "*"
 pre-commit = "*"
 mypy = "*"
 flake8 = "*"
+allure-pytest = "*"
+pytest-asyncio = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.8"

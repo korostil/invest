@@ -1,9 +1,15 @@
+import allure
 import pytest
 
 from models.company import FinancialStatement
 
 
+@allure.feature('Модель данных')
+@allure.story('Валидация данных финансового показателя')
+@allure.label('layer', 'unit')
 class QuarterValidationTestCase:
+    @allure.title('Валидация прошла успешно')
+    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'statement',
         (
@@ -13,9 +19,11 @@ class QuarterValidationTestCase:
             {'title': 'Cash and cash equivalents', 'quarter': '1999Q4', 'value': 0},
         ),
     )
-    def test_success(self, statement):
+    async def test_success(self, statement):
         assert FinancialStatement(**statement)
 
+    @allure.title('При валидации возникли ошибки')
+    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'statement',
         (
@@ -31,6 +39,6 @@ class QuarterValidationTestCase:
             },
         ),
     )
-    def test_failed(self, statement):
+    async def test_failed(self, statement):
         with pytest.raises(ValueError):
             FinancialStatement(**statement)
