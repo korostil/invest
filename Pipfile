@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pydantic = "*"
 motor = "*"
+fastapi = "*"
+uvicorn = "*"
 
 [dev-packages]
 isort = "*"
