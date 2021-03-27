@@ -6,5 +6,7 @@ from app import app
 
 @pytest.mark.asyncio
 @pytest.fixture
-def client():
-    return AsyncClient(app=app, base_url='http://localhost')
+async def client():
+    client = AsyncClient(app=app, base_url='http://localhost')
+    yield client
+    await client.aclose()

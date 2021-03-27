@@ -8,18 +8,19 @@ pydantic = "*"
 motor = "*"
 fastapi = "*"
 uvicorn = "*"
+funcy = "*"
 
 [dev-packages]
 isort = "*"
 pytest = "*"
 pytest-freezegun = "*"
-mixer = "*"
 pre-commit = "*"
 mypy = "*"
 flake8 = "*"
 allure-pytest = "*"
 pytest-asyncio = "*"
 httpx = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.8"
