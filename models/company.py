@@ -27,7 +27,7 @@ class Ratio(BaseModel):
         }
 
     @validator('quarter')
-    def quarter_validator(cls, value):
+    def quarter_validator(cls, value: str) -> str:
         if not re.match(r'^\d{4}Q[1-4]$', value):
             raise ValueError(
                 'quarter must match pattern <year>Q<quarter_number> (ex.:2020Q3)'
@@ -46,7 +46,7 @@ class FinancialStatement(BaseModel):
         }
 
     @validator('quarter')
-    def quarter_validator(cls, value):
+    def quarter_validator(cls, value: str) -> str:
         if not re.match(r'^\d{4}Q[1-4]$', value):
             raise ValueError(
                 'quarter must match pattern <year>Q<quarter_number> (ex.:2020Q3)'

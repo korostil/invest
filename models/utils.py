@@ -1,4 +1,4 @@
-def response(data, message):
+def response(data: dict, message: str) -> dict:
     return {
         "data": [data],
         "code": 200,
@@ -6,5 +6,5 @@ def response(data, message):
     }
 
 
-def error_response(error, code, message):
+def error_response(error: str, code: str, message: str) -> dict:
     return {"error": error, "code": code, "message": message}
