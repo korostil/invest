@@ -3,13 +3,14 @@ import pytest
 
 from models.company import Ratio
 
+pytestmark = [pytest.mark.asyncio]
+
 
 @allure.feature('Модель данных')
 @allure.story('Валидация данных коэффициента')
 @allure.label('layer', 'unit')
 class QuarterValidationTestCase:
     @allure.title('Валидация прошла успешно')
-    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'ratio',
         (
@@ -23,7 +24,6 @@ class QuarterValidationTestCase:
         assert Ratio(**ratio)
 
     @allure.title('При валидации возникли ошибки')
-    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'ratio',
         (

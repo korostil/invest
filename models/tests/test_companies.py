@@ -3,13 +3,14 @@ import pytest
 
 from models.company import Company
 
+pytestmark = [pytest.mark.asyncio]
+
 
 @allure.feature('Модель данных')
 @allure.story('Валидация данных компании')
 @allure.label('layer', 'unit')
 class CompanyValidationTestCase:
     @allure.title('Валидация прошла успешно')
-    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'ratio',
         ({'title': 'P', 'industry': 'Regional Banks', 'sector': 'Finance'},),
@@ -18,7 +19,6 @@ class CompanyValidationTestCase:
         assert Company(**ratio)
 
     @allure.title('При валидации возникли ошибки')
-    @pytest.mark.asyncio
     @pytest.mark.parametrize(
         'ratio',
         (
