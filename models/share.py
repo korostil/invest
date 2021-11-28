@@ -1,8 +1,11 @@
-from pydantic import BaseModel, Field
+from umongo import Document, fields
+
+from app.database import motor_instance
 
 
-class Share(BaseModel):
-    ticker: str = Field(...)
+@motor_instance.register
+class Share(Document):
+    ticker = fields.StrField(unique=True)
 
-    class Config:
-        schema_extra = {'example': {'ticker': 'TSLA'}}
+    class Meta:
+        collection_name = 'shares'

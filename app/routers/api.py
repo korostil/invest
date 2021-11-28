@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query
 
 from app.database import database
-from models.share import Share
+from schemas.share import Share
 
 router = APIRouter()
 

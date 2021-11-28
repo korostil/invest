@@ -1,6 +1,6 @@
 import factory
 
-from odm.share import Share
+from models.share import Share
 from tests.factories.base import AsyncFactory
 
 

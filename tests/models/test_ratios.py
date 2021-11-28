@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from models.company import Ratio
+from schemas.company import Ratio
 
 pytestmark = [pytest.mark.asyncio]
 

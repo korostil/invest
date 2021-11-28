@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from models.company import FinancialStatement
+from schemas.company import FinancialStatement
 
 pytestmark = [pytest.mark.asyncio]
 
