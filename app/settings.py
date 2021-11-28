@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     # Database
     mongodb_host = 'localhost'
     mongodb_port = 27017
+    mongodb_database = 'invest'
 
 
 try:

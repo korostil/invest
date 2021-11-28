@@ -21,6 +21,11 @@ allure-pytest = "*"
 pytest-asyncio = "*"
 httpx = "*"
 factory-boy = "*"
+pytest-mock = "*"
+pytest-env = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
+
+[packages.umongo]
+extras = [ "motor",]

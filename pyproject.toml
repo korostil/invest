@@ -1,12 +1,17 @@
 [tool.black]
 target-version = ['py38']
 skip-string-normalization = true
+skip-magic-trailing-comma = true
 exclude = '''
 (
   /(
       \.git
     | \.mypy_cache
     | \.ipython
+    | \.venv
+    | venv
+    | \.pytest_cache
+    | allure-results
   )/
 )
 '''

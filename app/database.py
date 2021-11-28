@@ -1,9 +1,12 @@
 import motor.motor_asyncio
+from umongo.frameworks import MotorAsyncIOInstance
 
-from app.settings import Settings
+from app.settings import settings
 
 client = motor.motor_asyncio.AsyncIOMotorClient(
-    Settings.mongodb_host, Settings.mongodb_port
+    settings.mongodb_host, settings.mongodb_port
 )
 
-database = client.invest
+database = client[settings.mongodb_database]
+
+motor_instance = MotorAsyncIOInstance(database)

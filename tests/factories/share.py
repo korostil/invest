@@ -1,9 +1,10 @@
 import factory
 
-from models.share import Share
+from odm.share import Share
+from tests.factories.base import AsyncFactory
 
 
-class ShareFactory(factory.Factory):
+class ShareFactory(AsyncFactory):
     class Meta:
         model = Share
 

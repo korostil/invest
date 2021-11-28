@@ -5,13 +5,13 @@ import pytest
 from fastapi import status
 from httpx import AsyncClient
 
-from tests.factories import ShareFactory
+from tests.factories.share import ShareFactory
 from tests.utils import serialize_shares, serializer_api_response, url_path_for
 
 pytestmark = [pytest.mark.asyncio]
 
 
-@allure.feature('Акций')
+@allure.feature('Акции')
 @allure.story('Получение списка акций')
 @allure.label('layer', 'API')
 class GetSharesListTestCase:
@@ -53,7 +53,7 @@ class GetSharesListTestCase:
     async def test_pagination(
         self, client: AsyncClient, limit: int, offset: int, total: int
     ):
-        shares = ShareFactory.create_batch(size=total)
+        shares = await ShareFactory.create_batch(size=total)
         response = await client.get(
             url_path_for(
                 'get_list_of_shares', query_params={'limit': limit, 'offset': offset}

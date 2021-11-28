@@ -12,8 +12,7 @@ pytestmark = [pytest.mark.asyncio]
 class CompanyValidationTestCase:
     @allure.title('Валидация прошла успешно')
     @pytest.mark.parametrize(
-        'ratio',
-        ({'title': 'P', 'industry': 'Regional Banks', 'sector': 'Finance'},),
+        'ratio', ({'title': 'P', 'industry': 'Regional Banks', 'sector': 'Finance'},)
     )
     async def test_success(self, ratio):
         assert Company(**ratio)
