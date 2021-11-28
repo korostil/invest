@@ -3,3 +3,7 @@ check:
 	black --check .
 	flake8
 	mypy .
+
+format:
+	isort .
+	black .
