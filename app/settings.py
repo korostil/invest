@@ -2,10 +2,16 @@ from pydantic import BaseSettings, ValidationError
 
 
 class Settings(BaseSettings):
+    # App
+    app_name: str = 'invest'
+    app_host: str = '0.0.0.0'
+    app_port: int = 8000
+    debug: bool = False
+
     # Database
-    mongodb_host = 'localhost'
-    mongodb_port = 27017
-    mongodb_database = 'invest'
+    mongodb_host: str = 'localhost'
+    mongodb_port: int = 27017
+    mongodb_database: str = 'invest'
 
 
 try:

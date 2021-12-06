@@ -9,6 +9,7 @@ motor = "*"
 fastapi = "*"
 uvicorn = "*"
 funcy = "*"
+ujson = "*"
 
 [dev-packages]
 isort = "*"
@@ -23,6 +24,7 @@ httpx = "*"
 factory-boy = "*"
 pytest-mock = "*"
 pytest-env = "*"
+types-ujson = "*"
 
 [requires]
 python_version = "3.9"

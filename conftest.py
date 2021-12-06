@@ -24,7 +24,7 @@ async def test_database(event_loop) -> AsyncGenerator:
 @pytest.mark.asyncio
 @pytest.fixture
 async def client() -> AsyncGenerator:
-    from app import app
+    from main import app
 
     client = AsyncClient(app=app, base_url='http://localhost')
     yield client

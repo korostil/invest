@@ -6,7 +6,7 @@ from fastapi import status
 from httpx import AsyncClient
 
 from tests.factories.share import ShareFactory
-from tests.utils import serialize_shares, serializer_api_response, url_path_for
+from tests.helpers import serialize_shares, serializer_api_response, url_path_for
 
 pytestmark = [pytest.mark.asyncio]
 
@@ -38,7 +38,7 @@ class GetSharesListTestCase:
         response = await client.get(url_path_for('get_list_of_shares'))
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == {'status': 'ok', 'data': []}
+        assert response.json() == serializer_api_response()
 
     @allure.title(
         'Если offset превышает общее количество акций, то вернется пустой список'

@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from tests.utils import url_path_for
+from tests.helpers import url_path_for
 
 
 @allure.feature('Утилиты')

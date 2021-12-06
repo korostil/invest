@@ -1,8 +1,9 @@
 import urllib.parse
+from typing import Optional, Union
 
 from funcy import collecting
 
-from app import app
+from main import app
 from models.share import Share
 
 
@@ -13,8 +14,14 @@ def url_path_for(name: str, query_params: dict = None, **path_params: str) -> st
     return url
 
 
-def serializer_api_response(data: dict) -> dict:
-    return {'status': 'ok', 'data': data}
+def serializer_api_response(data: Optional[Union[dict, list]] = None) -> dict:
+    data = data or []
+    response = {'status': 'ok', 'data': data}
+
+    if isinstance(data, list):
+        response['count'] = len(data)
+
+    return response
 
 
 @collecting

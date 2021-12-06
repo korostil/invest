@@ -1,11 +1,11 @@
 import factory
 
-from models.share import Share
+from models import share
 from tests.factories.base import AsyncFactory
 
 
 class ShareFactory(AsyncFactory):
     class Meta:
-        model = Share
+        model = share.Share
 
     ticker = factory.Sequence(lambda n: 'TKR%d' % n)
