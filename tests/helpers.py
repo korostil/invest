@@ -31,4 +31,4 @@ def serialize_shares(*shares):
 
 
 def serialize_share(share: Share, **extra) -> dict:
-    return {'ticker': share.ticker}
+    return {'ticker': share.ticker, **extra}

@@ -9,11 +9,14 @@ UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
 
 
 class CRUDBase(Generic[CollectionType, CreateSchemaType, UpdateSchemaType]):
+    search_field = 'id'
+
     def __init__(self, collection: Type[CollectionType]):
         self.collection = collection.opts.collection_name
 
     async def get(self, db: AsyncIOMotorDatabase, id: Any) -> Optional[CollectionType]:
-        return await db[self.collection].find_one({'id': id})  # type: ignore
+        query = {self.search_field: id}
+        return await db[self.collection].find_one(query)  # type: ignore
 
     async def get_list(
         self,

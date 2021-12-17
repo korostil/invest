@@ -6,7 +6,12 @@ from fastapi import status
 from httpx import AsyncClient
 
 from tests.factories.share import ShareFactory
-from tests.helpers import serialize_shares, serializer_api_response, url_path_for
+from tests.helpers import (
+    serialize_share,
+    serialize_shares,
+    serializer_api_response,
+    url_path_for,
+)
 
 pytestmark = [pytest.mark.asyncio]
 
@@ -64,3 +69,24 @@ class GetSharesListTestCase:
         assert response.json() == serializer_api_response(
             serialize_shares(shares[offset])
         )
+
+
+@allure.feature('Акции')
+@allure.story('Получение конкретной акций')
+@allure.label('layer', 'API')
+class GetShareTestCase:
+    @allure.title('Если запрошенной акции нет, то вернется ошибка')
+    async def test_not_found(self, client: AsyncClient):
+        response = await client.get(url_path_for('get_share', ticker='TSLA'))
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    @allure.title('Если запрошенная акция есть, то вернутся данные об акции')
+    async def test_success(self, client: AsyncClient):
+        ticker = 'TSLA'
+        share = await ShareFactory.create(ticker=ticker)
+
+        response = await client.get(url_path_for('get_share', ticker=ticker))
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.json() == serializer_api_response(serialize_share(share))
