@@ -82,7 +82,7 @@ class GetShareTestCase:
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
     @allure.title('Если запрошенная акция есть, то вернутся данные об акции')
-    async def test_success(self, client: AsyncClient):
+    async def test_success_get(self, client: AsyncClient):
         ticker = 'TSLA'
         share = await ShareFactory.create(ticker=ticker)
 

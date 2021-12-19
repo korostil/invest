@@ -1,6 +1,6 @@
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
-from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorDatabase
+from motor.motor_asyncio import AsyncIOMotorCollection
 from pydantic import BaseModel
 
 CollectionType = TypeVar('CollectionType', bound=AsyncIOMotorCollection)
@@ -12,43 +12,29 @@ class CRUDBase(Generic[CollectionType, CreateSchemaType, UpdateSchemaType]):
     search_field = 'id'
 
     def __init__(self, collection: Type[CollectionType]):
-        self.collection = collection.opts.collection_name
+        self.collection = collection
 
-    async def get(self, db: AsyncIOMotorDatabase, id: Any) -> Optional[CollectionType]:
+    async def get(self, id: Any) -> Optional[CollectionType]:
         query = {self.search_field: id}
-        return await db[self.collection].find_one(query)  # type: ignore
+        return await self.collection.find_one(query)  # type: ignore
 
     async def get_list(
-        self,
-        db: AsyncIOMotorDatabase,
-        *,
-        filter: dict = None,
-        sort: list = None,
-        skip: int = 0,
-        limit: int = 100,
+        self, *, filter: dict = None, sort: list = None, skip: int = 0, limit: int = 100
     ) -> List[CollectionType]:
-        documents = db[self.collection].find(filter, skip=skip)
+        documents = self.collection.find(filter, skip=skip)
         if sort:
             documents = documents.sort(sort)
         return await documents.to_list(length=limit)  # type: ignore
 
-    async def create(
-        self, db: AsyncIOMotorDatabase, *, document: CreateSchemaType
-    ) -> CollectionType:
-        return await db[self.collection].insert_one(document)  # type: ignore
+    async def create(self, *, document: CreateSchemaType) -> CollectionType:
+        return await self.collection.insert_one(document)  # type: ignore
 
     async def update(
-        self,
-        db: AsyncIOMotorDatabase,
-        *,
-        db_obj: CollectionType,
-        obj_in: Union[UpdateSchemaType, Dict[str, Any]],
+        self, *, db_obj: CollectionType, obj_in: Union[UpdateSchemaType, Dict[str, Any]]
     ) -> CollectionType:
-        result = await db[self.collection].update_one(
-            {'_id': db_obj._id}, {'$set': obj_in}
-        )
+        result = await self.collection.update_one({'_id': db_obj._id}, {'$set': obj_in})
         return result  # type: ignore
 
-    async def remove(self, db: AsyncIOMotorDatabase, *, id: Any) -> CollectionType:
-        result = await db[self.collection].delete_many({'_id': id})
+    async def remove(self, *, id: Any) -> CollectionType:
+        result = await self.collection.delete_many({'_id': id})
         return result  # type: ignore
