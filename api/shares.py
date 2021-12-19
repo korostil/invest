@@ -1,8 +1,9 @@
 import funcy
 from fastapi import APIRouter, Query
+from marshmallow import ValidationError
 
-from app.responses import APIResponse, NotFound
-from schemas.share import ShareResponse
+from app.responses import APIResponse, NotFound, UnprocessableEntity
+from schemas.share import ShareCreate, ShareResponse
 from services.shares import share
 
 router = APIRouter()
@@ -14,18 +15,24 @@ async def get_list_of_shares(
 ) -> APIResponse:
     shares = await share.get_list(limit=limit, skip=offset)
     return APIResponse(
-        [ShareResponse(**item) for item in funcy.lmap(lambda x: x.dump(), shares)]
+        [
+            ShareResponse(**share_document)
+            for share_document in funcy.lmap(lambda x: x.dump(), shares)
+        ]
     )
 
 
 @router.get('/share/{ticker}/', tags=['shares'])
 async def get_share(ticker: str = Query(...)) -> APIResponse:
-    share_item = await share.get(ticker)
-    if not share_item:
+    share_document = await share.get(ticker)
+    if not share_document:
         raise NotFound
-    return APIResponse(ShareResponse(**share_item.dump()))
+    return APIResponse(ShareResponse(**share_document.dump()))
 
 
-@router.get('/share/{ticker}/', tags=['shares'])
-async def get_share_info(ticker: str) -> list:
-    return [{"username": "Rick"}, {"username": "Morty"}]
+@router.post('/share/', tags=['shares'])
+async def create_share(share_data: ShareCreate) -> APIResponse:
+    with funcy.reraise(ValidationError, UnprocessableEntity):
+        share_document = await share.create(document=share_data)
+
+    return APIResponse(ShareResponse(**share_document.dump()))

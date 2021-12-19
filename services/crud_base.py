@@ -9,7 +9,7 @@ UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
 
 
 class CRUDBase(Generic[CollectionType, CreateSchemaType, UpdateSchemaType]):
-    search_field = 'id'
+    search_field = '_id'
 
     def __init__(self, collection: Type[CollectionType]):
         self.collection = collection
@@ -27,7 +27,10 @@ class CRUDBase(Generic[CollectionType, CreateSchemaType, UpdateSchemaType]):
         return await documents.to_list(length=limit)  # type: ignore
 
     async def create(self, *, document: CreateSchemaType) -> CollectionType:
-        return await self.collection.insert_one(document)  # type: ignore
+        new_document = self.collection(**document.dict())
+        await self.collection.ensure_indexes()
+        await new_document.commit()
+        return new_document  # type: ignore
 
     async def update(
         self, *, db_obj: CollectionType, obj_in: Union[UpdateSchemaType, Dict[str, Any]]

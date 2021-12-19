@@ -9,8 +9,8 @@ class ShareResponse(BaseModel):
 
 
 class ShareCreate(BaseModel):
-    pass
+    ticker: str = Field(...)
 
 
 class ShareUpdate(BaseModel):
-    pass
+    ticker: str = Field(...)
