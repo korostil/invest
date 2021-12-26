@@ -27,5 +27,5 @@ async def client() -> AsyncGenerator:
     from main import app
 
     client = AsyncClient(app=app, base_url='http://localhost')
-    yield client
-    await client.aclose()
+    async with client:
+        yield client

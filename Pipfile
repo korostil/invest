@@ -10,6 +10,8 @@ fastapi = "*"
 uvicorn = "*"
 funcy = "*"
 ujson = "*"
+click = "*"
+uvloop = "*"
 
 [dev-packages]
 isort = "*"
