@@ -6,11 +6,11 @@ from schemas.company import Ratio
 pytestmark = [pytest.mark.asyncio]
 
 
-@allure.feature('Модель данных')
-@allure.story('Валидация данных коэффициента')
+@allure.feature('Data model')
+@allure.story('Ratio validation')
 @allure.label('layer', 'unit')
 class QuarterValidationTestCase:
-    @allure.title('Валидация прошла успешно')
+    @allure.title('Ratio is valid')
     @pytest.mark.parametrize(
         'ratio',
         (
@@ -23,7 +23,7 @@ class QuarterValidationTestCase:
     async def test_success(self, ratio):
         assert Ratio(**ratio)
 
-    @allure.title('При валидации возникли ошибки')
+    @allure.title('An error occurred during validation')
     @pytest.mark.parametrize(
         'ratio',
         (

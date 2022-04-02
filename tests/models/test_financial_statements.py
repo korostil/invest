@@ -6,11 +6,11 @@ from schemas.company import FinancialStatement
 pytestmark = [pytest.mark.asyncio]
 
 
-@allure.feature('Модель данных')
-@allure.story('Валидация данных финансового показателя')
+@allure.feature('Data model')
+@allure.story('Financial statement validation')
 @allure.label('layer', 'unit')
 class QuarterValidationTestCase:
-    @allure.title('Валидация прошла успешно')
+    @allure.title('Statement is valid')
     @pytest.mark.parametrize(
         'statement',
         (
@@ -23,7 +23,7 @@ class QuarterValidationTestCase:
     async def test_success(self, statement):
         assert FinancialStatement(**statement)
 
-    @allure.title('При валидации возникли ошибки')
+    @allure.title('An error occurred during validation')
     @pytest.mark.parametrize(
         'statement',
         (

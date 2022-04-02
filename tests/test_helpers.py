@@ -4,9 +4,10 @@ import pytest
 from tests.helpers import url_path_for
 
 
-@allure.feature('Утилиты')
-@allure.story('Тестирование внутренних утилит')
+@allure.feature('Internal utilities')
+@allure.story('Test helpers')
 @allure.label('layer', 'unit')
+@allure.title('Get an url of view')
 @pytest.mark.parametrize(
     'name,query_params,path_params,expected',
     [

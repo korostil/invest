@@ -16,11 +16,11 @@ from tests.helpers import (
 pytestmark = [pytest.mark.asyncio]
 
 
-@allure.feature('Акции')
-@allure.story('Получение списка акций')
+@allure.feature('Shares')
+@allure.story('Get share list')
 @allure.label('layer', 'API')
 class GetSharesListTestCase:
-    @allure.title('При указании некорректного limit вернется ошибка')
+    @allure.title('If an invalid limit submitted, an error will be returned')
     @pytest.mark.parametrize('value', [-1, 0, 'a', 101])
     async def test_invalid_limit(self, client: AsyncClient, value: Any):
         response = await client.get(
@@ -29,7 +29,7 @@ class GetSharesListTestCase:
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-    @allure.title('При указании некорректного offset вернется ошибка')
+    @allure.title('If an invalid offset submitted, an error will be returned')
     @pytest.mark.parametrize('value', [-1, 'a'])
     async def test_invalid_offset(self, client: AsyncClient, value: Any):
         response = await client.get(
@@ -38,22 +38,20 @@ class GetSharesListTestCase:
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-    @allure.title('Если акций нет, то вернется пустой список')
+    @allure.title('If there are no shares, returns an empty list')
     async def test_empty(self, client: AsyncClient):
         response = await client.get(url_path_for('get_list_of_shares'))
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == serializer_api_response()
 
-    @allure.title(
-        'Если offset превышает общее количество акций, то вернется пустой список'
-    )
+    @allure.title('If an offset is greater than shares number, returns an empty list')
     async def test_offset_gt_total(self, client: AsyncClient):
         response = await client.get(url_path_for('get_list_of_shares'))
 
         assert response.status_code == status.HTTP_200_OK
 
-    @allure.title('Если переданы limit и offset, то акции отдаются постранично')
+    @allure.title('Shares successfully paginated by limit and offset')
     @pytest.mark.parametrize('limit,offset,total', [(1, 0, 2), (1, 1, 2)])
     async def test_pagination(
         self, client: AsyncClient, limit: int, offset: int, total: int
@@ -71,17 +69,17 @@ class GetSharesListTestCase:
         )
 
 
-@allure.feature('Акции')
-@allure.story('Получение конкретной акции')
+@allure.feature('Shares')
+@allure.story('Get a share info')
 @allure.label('layer', 'API')
 class GetShareTestCase:
-    @allure.title('Если запрошенной акции нет, то вернется ошибка')
+    @allure.title('If there is no requested share, an error will be returned')
     async def test_not_found(self, client: AsyncClient):
         response = await client.get(url_path_for('get_share', ticker='TSLA'))
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
-    @allure.title('Если запрошенная акция есть, то вернутся данные об акции')
+    @allure.title('Share successfully received')
     async def test_success_get(self, client: AsyncClient):
         ticker = 'TSLA'
         share = await ShareDocumentFactory.create(ticker=ticker)
@@ -92,17 +90,17 @@ class GetShareTestCase:
         assert response.json() == serializer_api_response(serialize_share(share))
 
 
-@allure.feature('Акции')
-@allure.story('Создание акции')
+@allure.feature('Shares')
+@allure.story('Create a share')
 @allure.label('layer', 'API')
 class CreateShareTestCase:
-    @allure.title('Если переданы данные без тикера, то вернется ошибка')
+    @allure.title('If ticker is not submitted, an error will be returned')
     async def test_ticker_required(self, client: AsyncClient):
         response = await client.post(url_path_for('create_share'), json={})
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-    @allure.title('Если передан неуникальный тикер, то акция не создастся')
+    @allure.title('If a non-unique ticker is submitted, an error will be returned')
     async def test_not_unique_ticker(self, client: AsyncClient):
         ticker = 'TSLA'
         await ShareDocumentFactory.create(ticker=ticker)
@@ -112,7 +110,7 @@ class CreateShareTestCase:
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-    @allure.title('Акция успешно создана')
+    @allure.title('Share successfully created')
     async def test_success_create(self, client: AsyncClient):
         share = ShareFactory.create()
 

@@ -6,18 +6,18 @@ from schemas.company import Company
 pytestmark = [pytest.mark.asyncio]
 
 
-@allure.feature('Модель данных')
-@allure.story('Валидация данных компании')
+@allure.feature('Data model')
+@allure.story('Company info validation')
 @allure.label('layer', 'unit')
 class CompanyValidationTestCase:
-    @allure.title('Валидация прошла успешно')
+    @allure.title('Statement is valid')
     @pytest.mark.parametrize(
         'ratio', ({'title': 'P', 'industry': 'Regional Banks', 'sector': 'Finance'},)
     )
     async def test_success(self, ratio):
         assert Company(**ratio)
 
-    @allure.title('При валидации возникли ошибки')
+    @allure.title('An error occurred during validation')
     @pytest.mark.parametrize(
         'ratio',
         (
