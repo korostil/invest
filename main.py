@@ -3,10 +3,12 @@ import uvicorn
 from fastapi import FastAPI
 
 from api import router
+from app.openapi import openapi_schema
 from app.settings import settings
 
 app = FastAPI(title=settings.app_name, debug=settings.debug)
 app.include_router(router, prefix='/api')
+app.openapi = openapi_schema  # type: ignore
 
 
 @click.group()
