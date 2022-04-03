@@ -6,7 +6,9 @@ from app.responses import APIResponse, NotFound, UnprocessableEntity
 from schemas.share import ShareCreate, ShareResponse
 from services.shares import share
 
-router = APIRouter()
+from . import version
+
+router = APIRouter(prefix=f'/{version}')
 
 
 @router.get('/shares/', tags=['shares'])
