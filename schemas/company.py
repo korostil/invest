@@ -12,7 +12,25 @@ from app.constants import (
 )
 
 
-class Company(BaseModel):
+class CompanyResponse(BaseModel):
+    title: constr(min_length=1)  # type: ignore
+    description: str = Field('')
+    industry: IndustryEnum
+    sector: SectorEnum
+    ratios: List[Dict[str, Any]] = Field([])
+    financial_statements: List[Dict[str, Any]] = Field([])
+
+
+class CompanyCreate(BaseModel):
+    title: constr(min_length=1)  # type: ignore
+    description: str = Field('')
+    industry: IndustryEnum
+    sector: SectorEnum
+    ratios: List[Dict[str, Any]] = Field([])
+    financial_statements: List[Dict[str, Any]] = Field([])
+
+
+class CompanyUpdate(BaseModel):
     title: constr(min_length=1)  # type: ignore
     description: str = Field('')
     industry: IndustryEnum
