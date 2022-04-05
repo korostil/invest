@@ -14,10 +14,10 @@ class QuarterValidationTestCase:
     @pytest.mark.parametrize(
         'statement',
         (
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q1', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q2', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q3', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q4', 'value': 0},
+            {'code': '1', 'quarter': '1999Q1', 'value': 0},
+            {'code': '1', 'quarter': '1999Q2', 'value': 0},
+            {'code': '1', 'quarter': '1999Q3', 'value': 0},
+            {'code': '1', 'quarter': '1999Q4', 'value': 0},
         ),
     )
     async def test_success(self, statement):
@@ -27,16 +27,12 @@ class QuarterValidationTestCase:
     @pytest.mark.parametrize(
         'statement',
         (
-            {'title': 'Cash and cash equivalents', 'quarter': '', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q0', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '1999Q5', 'value': 0},
-            {'title': 'Cash and cash equivalents', 'quarter': '19992Q1', 'value': 0},
-            {
-                'title': 'Cash and cash equivalents',
-                'quarter': '1999Q1 1999Q1',
-                'value': 0,
-            },
+            {'code': '1', 'quarter': '', 'value': 0},
+            {'code': '1', 'quarter': '1999', 'value': 0},
+            {'code': '1', 'quarter': '1999Q0', 'value': 0},
+            {'code': '1', 'quarter': '1999Q5', 'value': 0},
+            {'code': '1', 'quarter': '19992Q1', 'value': 0},
+            {'code': '1', 'quarter': '1999Q1 1999Q1', 'value': 0},
         ),
     )
     async def test_failed(self, statement):

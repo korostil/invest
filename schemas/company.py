@@ -4,7 +4,12 @@ from typing import Any, Dict, List
 from pydantic import BaseModel, Field, condecimal, constr, validator
 from pydantic.types import Decimal  # noqa
 
-from app.constants import IndustryEnum, SectorEnum
+from app.constants import (
+    FinancialStatementCodeEnum,
+    IndustryEnum,
+    RatioCodeEnum,
+    SectorEnum,
+)
 
 
 class Company(BaseModel):
@@ -17,13 +22,13 @@ class Company(BaseModel):
 
 
 class Ratio(BaseModel):
-    title: str = Field(...)
+    code: RatioCodeEnum
     quarter: str = Field(...)
     value: condecimal(decimal_places=2)  # type: ignore
 
     class Config:
         schema_extra = {
-            'example': {'title': 'Debt/Equity', 'quarter': '2020Q3', 'value': '58.32'}
+            'example': {'code': '1.1', 'quarter': '2020Q3', 'value': '58.32'}
         }
 
     @validator('quarter')
@@ -36,13 +41,13 @@ class Ratio(BaseModel):
 
 
 class FinancialStatement(BaseModel):
-    title: str = Field(...)
+    code: FinancialStatementCodeEnum
     quarter: str = Field(...)
     value: condecimal(decimal_places=2)  # type: ignore
 
     class Config:
         schema_extra = {
-            'example': {'title': 'Equity', 'quarter': '2020Q3', 'value': '123456789.87'}
+            'example': {'code': '1', 'quarter': '2020Q3', 'value': '123456789.87'}
         }
 
     @validator('quarter')

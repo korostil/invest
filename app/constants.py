@@ -6,6 +6,16 @@ RATIOS = {
 }
 
 
+class RatioCodeEnum(str, Enum):
+    p_e = '1.1'
+    p_s = '1.2'
+
+
+class FinancialStatementCodeEnum(str, Enum):
+    revenue = '1'
+    profit = '2'
+
+
 class SectorEnum(str, Enum):
     retail_trade = 'Retail Trade'
     finance = 'Finance'
